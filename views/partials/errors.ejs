@@ -1,0 +1,15 @@
+<% if(typeof errors !=='undefined' && errors && errors.length> 0){%>
+  <div id="errorBox" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+    <button type="button" onclick="document.getElementById('errorBox').style.display='none'"
+      class="absolute top-3 right-3 text-red-700 hover:text-red-900 text-2xl font-bold cursor-pointer">
+      &times;
+    </button>
+    <ul class="list-disc list-inside pr-8">
+      <% errors.forEach(function(error) { %>
+        <li>
+          <%= error %>
+        </li>
+        <% }); %>
+    </ul>
+  </div>
+  <% }%>

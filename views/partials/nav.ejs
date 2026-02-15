@@ -1,0 +1,96 @@
+<header class="bg-white shadow-lg">
+  <nav class="container mx-auto flex items-center justify-between py-6 px-4">
+
+    <!-- Logo -->
+    <div class="flex-shrink-0">
+      <a href="/" class="text-5xl font-extrabold text-pink-600 hover:text-pink-700 transition-colors duration-200">
+        StayZy
+      </a>
+    </div>
+    <% if(isLoggedIn) { %>
+      <ul class="flex space-x-4 flex-1 justify-center">
+        <% if(user && user.userType==='guest' ) { %>
+          <!-- Guest Nav Links -->
+          <li>
+            <a href="/airbnbHome-list"
+              class="<%= currentPage === 'airbnbHome-list' ? 'bg-purple-100' : 'hover:bg-purple-100' %>
+                   text-purple-600 hover:text-purple-800 px-4 py-2 rounded-lg font-semibold transition-colors duration-200">
+              Homes
+            </a>
+          </li>
+
+          <li>
+            <a href="/favourite-list"
+              class="<%= currentPage === 'favourite-list' ? 'bg-green-100' : 'hover:bg-green-100' %>
+                   text-green-600 hover:text-green-800 px-4 py-2 rounded-lg font-semibold transition-colors duration-200">
+              My Favourites
+            </a>
+          </li>
+
+          <li>
+            <a href="/booking"
+              class="<%= currentPage === 'booking' ? 'bg-yellow-100' : 'hover:bg-yellow-100' %>
+                   text-yellow-600 hover:text-yellow-800 px-4 py-2 rounded-lg font-semibold transition-colors duration-200">
+              Bookings
+            </a>
+          </li>
+
+          <% } else if(user && user.userType==='host' ) { %>
+            <!-- Host Nav Links -->
+            <li>
+              <a href="/host/add-home" class="<%= currentPage === 'add-home' || currentPage === 'home-added' ? 'bg-pink-100' : 'hover:bg-pink-100' %>
+                 text-pink-600 hover:text-pink-800 px-4 py-2 rounded-lg font-semibold transition-colors duration-200">
+                Add Home
+              </a>
+            </li>
+
+            <li>
+              <a href="/host/host-airbnbHome-list"
+                class="<%= currentPage === 'host-airbnbHome-list' ? 'bg-orange-100' : 'hover:bg-orange-100' %>
+                 text-orange-600 hover:text-orange-800 px-4 py-2 rounded-lg font-semibold transition-colors duration-200">
+                Host Home List
+              </a>
+            </li>
+
+            <% } %>
+      </ul>
+      <% } %>
+        <!-- Auth Buttons (Right Corner) -->
+        <div class="flex items-center gap-8 flex-shrink-0">
+          <% if(!isLoggedIn) { %>
+
+            <!-- Log In -->
+            <a href="/login" class="px-5 py-2 rounded-lg font-semibold text-sm
+              border border-pink-600 text-pink-600
+              hover:bg-pink-50
+              transition-all duration-200">
+              Log In
+            </a>
+
+            <!-- Sign Up -->
+            <a href="/signup" class="px-5 py-2 rounded-lg font-semibold text-sm
+              bg-pink-600 text-white
+              shadow-sm
+              hover:bg-pink-700
+              hover:shadow-md
+              transition-all duration-200">
+              Sign Up
+            </a>
+
+            <% } else { %>
+
+              <form action="/logout" method="POST">
+                <button type="submit" class="px-5 py-2 rounded-lg font-semibold text-sm
+               bg-pink-600 text-white
+               shadow-sm
+               hover:bg-pink-700
+               hover:shadow-md
+               transition-all duration-200">
+                  Log Out
+                </button>
+              </form>
+
+              <% } %>
+        </div>
+  </nav>
+</header>

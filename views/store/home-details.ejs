@@ -1,0 +1,80 @@
+<%- include('../partials/head') %>
+  </head>
+
+  <body class="bg-gradient-to-br from-blue-100 via-white to-pink-100 min-h-screen flex flex-col">
+    <%- include('../partials/nav') %>
+
+      <main class="flex-1 flex flex-col items-center justify-start px-6 py-10">
+        <!-- Card -->
+        <div class="w-full max-w-5xl bg-white rounded-2xl shadow-lg overflow-hidden flex flex-row">
+
+
+          <!-- IMAGE (LEFT) -->
+          <div class="md:w-1/2 flex items-center justify-center bg-gray-50 p-6">
+            <!-- wrapper limits width so image doesn't blow up horizontally -->
+            <div class="w-full max-w-md">
+              <img src="<%= homeReg.photo %>" alt="<%= homeReg.homeregName %>"
+                class="w-full h-auto max-h-[360px] object-cover rounded-lg shadow-md mx-auto" />
+            </div>
+          </div>
+
+
+          <!-- Details Right -->
+          <div class="md:w-1/2 p-8 flex flex-col justify-between">
+
+            <!-- Title -->
+            <h2 class="text-2xl font-extrabold text-red-600 mb-6">Details of</h2>
+
+            <div class="space-y-6 text-gray-700">
+              <!-- Description -->
+              <div>
+                <h3 class="font-semibold text-lg text-gray-800">Description</h3>
+                <p class="text-gray-600">
+                  <%= homeReg.description %>
+                </p>
+              </div>
+
+              <!-- Location -->
+              <div>
+                <h3 class="font-semibold text-lg text-gray-800">Location</h3>
+                <p class="text-gray-600">
+                  <%= homeReg.location %>
+                </p>
+              </div>
+
+              <!-- Price -->
+              <div>
+                <h3 class="font-semibold text-lg text-gray-800">Price</h3>
+                <p class="text-green-600 font-semibold">$<%= homeReg.pricePerNight %> / night</p>
+              </div>
+
+              <!-- Rating -->
+              <div>
+                <h3 class="font-semibold text-lg text-gray-800">Rating</h3>
+                <p class="flex items-center gap-1 text-yellow-500">
+                  ⭐ <span class="text-gray-700">
+                    <%= homeReg.rating %> / 5
+                  </span>
+                </p>
+              </div>
+            </div>
+
+            <!-- Add Favourites -->
+
+            <div class="mt-6">
+              <%- include('../partials/favourite') %>
+            </div>
+
+          </div>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="bg-white py-6 mt-12 shadow-inner">
+        <div class="container mx-auto text-center">
+          <p class="text-gray-500 text-sm">&copy; 2025 Stayzy, Inc. All rights reserved.</p>
+        </div>
+      </footer>
+  </body>
+
+  </html>
