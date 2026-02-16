@@ -17,8 +17,7 @@ const session = require("express-session");
 const mongoose = require("mongoose");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const multer = require("multer");
-const DB_PATH =
-  "mongodb+srv://Eatzo:Eatzo2952@clusterone.lvvroop.mongodb.net/airbnb?appName=ClusterOne";
+const DB_PATH = process.env.MONGO_URI;
 
 const store = new MongoDBStore({
   uri: DB_PATH,
@@ -64,7 +63,8 @@ const fileFilter = (req, file, cb) => {
 };
 
 const multerOptions = {
-  storage, fileFilter,
+  storage,
+  fileFilter,
 };
 // Parse incoming form data
 app.use(express.urlencoded({ extended: false }));
@@ -75,7 +75,10 @@ app.use(multer(multerOptions).single("photo")); // 'photo' is the name of the fi
 app.use(express.static(path.join(rootDir, "public")));
 app.use("/uploads", express.static(path.join(rootDir, "uploads")));
 app.use("/host/uploads", express.static(path.join(rootDir, "uploads")));
-app.use("/airbnbHome-list/uploads", express.static(path.join(rootDir, "uploads")));
+app.use(
+  "/airbnbHome-list/uploads",
+  express.static(path.join(rootDir, "uploads")),
+);
 
 // Parse cookies from browser
 app.use(cookieParser());
