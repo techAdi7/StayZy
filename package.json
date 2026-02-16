@@ -5,8 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tailwind": "npx tailwindcss -i ./views/input.css -o ./public/output.css --watch",
-    "start": "nodemon app.js & npm run tailwind"
+    "dev": "nodemon app.js",
+    "build-css": "npx tailwindcss -i ./views/input.css -o ./public/output.css",
+    "start": "node app.js"
   },
   "author": "Adil Sheikh",
   "license": "ISC",
