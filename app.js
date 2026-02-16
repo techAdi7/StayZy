@@ -9,7 +9,8 @@
 // IMPORTING REQUIRED MODULES
 // ======================================
 const path = require("path");
-const rootDir = path.dirname(require.main.filename);
+// Use __dirname for better path resolution (works on both Windows and Linux)
+const rootDir = __dirname;
 
 const express = require("express");
 const cookieParser = require("cookie-parser");
@@ -17,11 +18,24 @@ const session = require("express-session");
 const mongoose = require("mongoose");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const multer = require("multer");
-const DB_PATH = process.env.MONGO_URI;
 
+// ======================================
+// ENVIRONMENT VARIABLES
+// ======================================
+// Get MONGO_URI from environment variable, or use local fallback for development
+const DB_PATH = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/stayzy";
+
+// Get session secret from environment variable, or use fallback for development
+const SESSION_SECRET = process.env.SESSION_SECRET || "airbnb project work";
+
+// Get PORT from environment variable (Render provides this), or use 4006 for local
+const PORT = process.env.PORT || 4006;
+
+// Initialize MongoDB Store with the DB_PATH
 const store = new MongoDBStore({
   uri: DB_PATH,
   collection: "sessions",
+  expires: 1000 * 60 * 60 * 24, // 24 hours
 });
 // ======================================
 // INITIALIZING EXPRESS APP
@@ -87,7 +101,7 @@ app.use(cookieParser());
 // This creates: req.session
 app.use(
   session({
-    secret: "airbnb project work",
+    secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     store: store,
@@ -148,7 +162,6 @@ app.use(errorController.error404);
 // ======================================
 // DATABASE CONNECTION + SERVER START
 // ======================================
-const PORT = process.env.PORT || 4006;
 
 mongoose
   .connect(DB_PATH)
@@ -161,4 +174,5 @@ mongoose
   })
   .catch((err) => {
     console.log("❌ MongoDB connection error:", err);
+    console.log("Make sure MONGO_URI environment variable is set!");
   });
