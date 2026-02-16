@@ -145,7 +145,7 @@ app.use(errorController.error404);
 // ======================================
 // DATABASE CONNECTION + SERVER START
 // ======================================
-const PORT = 4006;
+const PORT = process.env.PORT || 4006;
 
 mongoose
   .connect(DB_PATH)
