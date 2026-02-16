@@ -62,4 +62,4 @@ npm start
 http://localhost:3000
 
 🌐 Live Demo
-👉 (Add your deployed link here if available)
+👉 https://stayzy-1-2j48.onrender.com
