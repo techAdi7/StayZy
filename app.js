@@ -25,6 +25,10 @@ const multer = require("multer");
 // Get MONGO_URI from environment variable, or use local fallback for development
 const DB_PATH = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/stayzy";
 
+// Debug: Log the DB_PATH to check if MONGO_URI is being read
+console.log("🔍 DB_PATH:", DB_PATH);
+console.log("🔍 MONGO_URI env:", process.env.MONGO_URI);
+
 // Get session secret from environment variable, or use fallback for development
 const SESSION_SECRET = process.env.SESSION_SECRET || "airbnb project work";
 
