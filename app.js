@@ -22,6 +22,9 @@ const multer = require("multer");
 // ======================================
 // ENVIRONMENT VARIABLES
 // ======================================
+// Debug: Log ALL environment variables to diagnose the issue
+console.log("🔍 ALL ENV VARS:", JSON.stringify(process.env, null, 2));
+
 // Get MONGO_URI from environment variable, or use local fallback for development
 const DB_PATH = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/stayzy";
 
